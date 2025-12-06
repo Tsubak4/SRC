@@ -25,7 +25,7 @@
       }
 
       body {
-        background: url("assets/logo.png") center/cover no-repeat fixed;
+        background: url("/assets/logo.png") center/cover no-repeat fixed;
         color: var(--light);
         font-family: "Montserrat", sans-serif;
       }
@@ -38,7 +38,6 @@
 
       header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         padding: 15px 20px;
         background: var(--dark);
@@ -53,15 +52,15 @@
       }
 
       nav {
-        position: absolute;
-        top: 70px;
-        right: 20px;
+        display: none;
         flex-direction: column;
         background: var(--dark);
         border: 2px solid var(--orange);
         border-radius: 10px;
         padding: 10px;
-        display: none;
+        position: absolute;
+        top: 70px;
+        right: 20px;
         width: 180px;
         z-index: 20;
       }
@@ -94,6 +93,7 @@
         cursor: pointer;
         gap: 5px;
         z-index: 30;
+        margin-left: auto;
       }
 
       .burger div {
@@ -117,15 +117,17 @@
         .burger {
           display: none;
         }
-        
+
         nav {
           display: flex !important;
           flex-direction: row;
           position: relative;
-          border: none;
+          top: auto;
+          right: auto;
           background: none;
+          border: none;
           width: auto;
-          margin-right: 20px;
+          margin-left: auto;
         }
 
         nav a {
@@ -140,15 +142,16 @@
         position: relative;
       }
 
-      .hero p {
-        font-size: 2rem;
-        font-weight: bold;
-        color: white;
-        text-shadow: 0 0 10px #ff8c00, 0 0 25px #7623ff, 0 0 50px #ff8c00;
-        margin: 20px auto 0 auto;
-        max-width: 600px;
-        text-align: center;
-        animation: neonPulse 2s infinite alternate;
+      .hero::before {
+        content: "";
+        background: url("/assets/logo2.png") center/cover no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        z-index: 1;
       }
 
       .hero-title-wrapper {
@@ -158,6 +161,7 @@
         background: black;
         border: 3px solid var(--violet);
         position: relative;
+        z-index: 2;
         animation: neonBorderPulse 2s infinite alternate;
         box-shadow: 0 0 20px rgba(118, 35, 255, 0.8),
           0 0 40px rgba(255, 140, 0, 0.4);
@@ -176,7 +180,6 @@
         top: -20px;
         left: -15px;
       }
-
       .hero-title-wrapper::after {
         bottom: -20px;
         right: -15px;
@@ -189,6 +192,23 @@
         color: var(--violet);
         text-shadow: 0 0 10px #b14bff, 0 0 25px #ff8c00, 0 0 50px var(--violet);
         animation: neonGlow 1.3s infinite alternate;
+      }
+
+      .hero p {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 10px #ff8c00, 0 0 25px #7623ff, 0 0 50px #ff8c00;
+        margin: 20px auto 0 auto;
+        max-width: 600px;
+        padding: 10px 20px;
+        border-radius: 15px;
+        background: black;
+        border: 2px solid var(--violet);
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        animation: neonPulse 2s infinite alternate;
       }
 
       @keyframes neonGlow {
@@ -211,6 +231,18 @@
         }
       }
 
+      @keyframes neonPulse {
+        0% {
+          box-shadow: 0 0 5px #7623ff, 0 0 10px #ff8c00;
+        }
+        50% {
+          box-shadow: 0 0 20px #7623ff, 0 0 35px #ff8c00;
+        }
+        100% {
+          box-shadow: 0 0 5px #7623ff, 0 0 10px #ff8c00;
+        }
+      }
+
       @keyframes sparkMove {
         0% {
           transform: translate(0, 0) rotate(0deg);
@@ -230,14 +262,12 @@
         padding: 60px 20px;
         text-align: center;
       }
-
       section h2 {
         color: white;
         text-decoration: underline;
         font-size: 2rem;
         margin-bottom: 10px;
       }
-
       .btn {
         display: inline-block;
         padding: 12px 30px;
@@ -249,7 +279,6 @@
         cursor: pointer;
         transition: 0.3s;
       }
-
       .btn:hover {
         transform: scale(1.05);
       }
@@ -278,33 +307,9 @@
         pointer-events: none;
         transition: 0.3s;
       }
-
       .modal-bg.show {
         opacity: 1;
         pointer-events: auto;
-      }
-
-      @keyframes neonPulse {
-        0% {
-          box-shadow: 0 0 5px #7623ff, 0 0 10px #ff8c00;
-        }
-        50% {
-          box-shadow: 0 0 20px #7623ff, 0 0 35px #ff8c00;
-        }
-        100% {
-          box-shadow: 0 0 5px #7623ff, 0 0 10px #ff8c00;
-        }
-      }
-
-      @keyframes popupAppear {
-        0% {
-          opacity: 0;
-          transform: scale(0.7);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
       }
 
       .modal {
@@ -317,7 +322,6 @@
         opacity: 0;
         animation: neonPulse 2s infinite alternate;
       }
-
       .modal-bg.show .modal {
         animation: popupAppear 0.3s ease-out forwards,
           neonPulse 2s infinite alternate;
@@ -329,7 +333,6 @@
         color: var(--orange);
         font-weight: bold;
       }
-
       .modal input {
         width: 100%;
         padding: 10px;
@@ -337,19 +340,30 @@
         border-radius: 5px;
         border: none;
       }
+
+      @keyframes popupAppear {
+        0% {
+          opacity: 0;
+          transform: scale(0.7);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
     </style>
   </head>
 
   <body>
     <header>
-      <img src="assets/logo.png" alt="SLR Logo" />
+      <img src="/assets/logo.png" alt="SLR Logo" />
       <div class="burger" id="burger">
         <div></div>
         <div></div>
         <div></div>
       </div>
       <nav id="nav-links">
-        <a href="index.html">Accueil</a>
+        <a href="#">Accueil</a>
         <a href="scores.html">Liste Noir</a>
         <a href="planning.html">Planning</a>
         <a href="#" id="openModal">S'inscrire</a>
@@ -357,9 +371,7 @@
     </header>
 
     <div class="hero">
-      <div class="hero-title-wrapper">
-        <h1>Street League Racing</h1>
-      </div>
+      <div class="hero-title-wrapper"><h1>Street League Racing</h1></div>
       <p>Courses • Poursuites • 800m • Drift</p>
     </div>
 
@@ -375,12 +387,10 @@
 
     <footer>⚡ SLR — Street League Racing</footer>
 
-    <!-- POP-UP -->
     <div class="modal-bg" id="modalBox">
       <div class="modal">
         <span class="close-btn" id="closeModal">X</span>
         <h3>Inscription</h3>
-
         <form id="signupForm">
           <input type="text" name="nom" placeholder="Nom" required />
           <input type="text" name="prenom" placeholder="Prénom" required />
@@ -411,20 +421,18 @@
         .getElementById("signupForm")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
-
           const last = localStorage.getItem("slr_last_submit");
           const now = Date.now();
-
           if (last && now - last < 86400000) {
             return alert(
               "❌ Vous avez déjà fait une demande. Réessayez dans 24h."
             );
           }
 
-          const nom = this.nom.value;
-          const prenom = this.prenom.value;
-          const tel = this.tel.value;
-          const surnom = this.surnom.value;
+          const nom = this.nom.value,
+            prenom = this.prenom.value,
+            tel = this.tel.value,
+            surnom = this.surnom.value;
 
           const webhookURL =
             "https://discord.com/api/webhooks/1446569219021078528/IqzDXSP-w4mpbZAHAZHNqc4iBj2XJ1uoLsKm9JnmFqx2ybWvGJo2A8UtfpNDNc240soq";
@@ -452,16 +460,12 @@
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
             });
-
             if (res.ok) {
               modal.classList.remove("show");
               localStorage.setItem("slr_last_submit", now);
-
               showConfirmation();
               this.reset();
-            } else {
-              alert("❌ Erreur Discord !");
-            }
+            } else alert("❌ Erreur Discord !");
           } catch {
             alert("❌ Erreur d’envoi.");
           }
@@ -469,22 +473,13 @@
 
       function showConfirmation() {
         const box = document.createElement("div");
-        box.style.cssText = `
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    display:flex;justify-content:center;align-items:center;
-    background:rgba(0,0,0,0.7);z-index:999;
-  `;
-
-        box.innerHTML = `
-    <div style="background:#1a1a2e;padding:25px;border-radius:15px;
-    width:300px;text-align:center;border:2px solid #7623ff;
-    animation: popupAppear .3s ease-out forwards, neonPulse 2s infinite alternate;">
-      <h3>Inscription enregistrée</h3>
-      <p>Vous serez contacté par message.</p>
-      <button style="margin-top:20px;" class="btn" onclick="this.parentElement.parentElement.remove()">OK</button>
-    </div>
-  `;
-
+        box.style.cssText =
+          "position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:rgba(0,0,0,0.7);z-index:999;";
+        box.innerHTML = `<div style="background:#1a1a2e;padding:25px;border-radius:15px;width:300px;text-align:center;border:2px solid #7623ff;animation: popupAppear .3s ease-out forwards, neonPulse 2s infinite alternate;">
+  <h3>Inscription enregistrée</h3>
+  <p>Vous serez contacté par message.</p>
+  <button style="margin-top:20px;" class="btn" onclick="this.parentElement.parentElement.remove()">OK</button>
+  </div>`;
         document.body.appendChild(box);
       }
     </script>
