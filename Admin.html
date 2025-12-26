@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SRC Admin</title>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD1BQIb2nkGyr4m-elfZlcE88YvGG5pLaE",
+        authDomain: "src-admin-e9b49.firebaseapp.com",
+        projectId: "src-admin-e9b49",
+        storageBucket: "src-admin-e9b49.firebasestorage.app",
+        messagingSenderId: "42898128978",
+        appId: "1:42898128978:web:c899eccb8b9aeb465d5f8b",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      window.login = () => {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const error = document.getElementById("error");
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            window.location.href = "dashboard.html";
+          })
+          .catch(() => {
+            error.innerText = "Access denied";
+          });
+      };
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) window.location.href = "dashboard.html";
+      });
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle at top, #0f0f0f, #000);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      .back-arrow {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 28px;
+        color: #ff2a2a;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 10px rgba(255, 42, 42, 0.7);
+        z-index: 10;
+      }
+
+      .back-arrow:hover {
+        transform: translateX(-6px);
+        color: #ffffff;
+        text-shadow: 0 0 20px rgba(255, 42, 42, 1);
+      }
+
+      .back-arrow::after {
+        content: " BACK";
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-left: 6px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .back-arrow:hover::after {
+        opacity: 0.7;
+      }
+
+      .login-box {
+        background: rgba(0, 0, 0, 0.85);
+        border: 2px solid #ff2a2a;
+        padding: 40px;
+        width: 320px;
+        box-shadow: 0 0 30px rgba(255, 42, 42, 0.4);
+        text-align: center;
+        z-index: 2;
+      }
+
+      .login-box h1 {
+        margin-bottom: 10px;
+        color: #ff2a2a;
+        letter-spacing: 2px;
+      }
+
+      .login-box p {
+        font-size: 13px;
+        opacity: 0.7;
+        margin-bottom: 30px;
+      }
+
+      .login-box input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        background: #111;
+        border: 1px solid #444;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .login-box input:focus {
+        outline: none;
+        border-color: #ff2a2a;
+      }
+
+      .login-box button {
+        width: 100%;
+        padding: 12px;
+        background: #ff2a2a;
+        border: none;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        letter-spacing: 1px;
+      }
+
+      .login-box button:hover {
+        background: #ff5555;
+      }
+
+      .error {
+        color: #ff5555;
+        font-size: 13px;
+        margin-top: 10px;
+        min-height: 18px;
+      }
+
+      .footer {
+        margin-top: 25px;
+        font-size: 11px;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back-arrow">⟵</a>
+
+    <div class="login-box">
+      <h1>⚡ SRC</h1>
+      <p>Admin Access Only</p>
+
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">LOGIN</button>
+
+      <div id="error" class="error"></div>
+
+      <div class="footer">Shadow Racing Crew</div>
+    </div>
+  </body>
+</html>
