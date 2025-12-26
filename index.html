@@ -24,8 +24,10 @@
         box-sizing: border-box;
       }
 
+      /* FOND MODIFIÉ */
       body {
-        background: url("assets/logo.png") center/cover no-repeat fixed;
+        background: url("/assets/logo.png") center black no-repeat fixed;
+        background-size: contain;
         color: var(--light);
         font-family: "Montserrat", sans-serif;
       }
@@ -146,7 +148,7 @@
 
       .hero::before {
         content: "";
-        background: url("assets/logo2.png") center/cover no-repeat;
+        background: url("/assets/logo2.png") center/cover no-repeat;
         position: absolute;
         top: 0;
         left: 0;
@@ -355,16 +357,16 @@
       }
 
       .footer-emote {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
     </style>
   </head>
 
   <body>
     <header>
-      <img src="assets/logo.png" alt="SRC Logo" />
+      <img src="/assets/logo.png" alt="SRC Logo" />
       <div class="burger" id="burger">
         <div></div>
         <div></div>
@@ -391,14 +393,14 @@
         jamais et où les sirènes résonnent plus souvent que le vent. Nous sommes
         des passionnés d’automobile, des obsédés de la vitesse et du contrôle
         parfait, guidés par une seule chose : la maîtrise de la route, sous
-        n’importe quelles conditions.</br>
-        Nos sessions sont non officielles, jamais
-        annoncées, et seuls ceux qui ont prouvé leur loyauté connaissent les
-        lieux exacts. Nous cherchons l’adrénaline pure, l’art de la conduite, et
-        la fraternité entre ceux qui vivent pour la vitesse.</br>
-        Dans Los Santos, on parle de nous à voix basse. On dit que lorsque l’on entend un moteur
-        hurler au loin en pleine nuit… c’est que le Shadow Racing Crew est de
-        sortie.
+        n’importe quelles conditions.<br />
+        Nos sessions sont non officielles, jamais annoncées, et seuls ceux qui
+        ont prouvé leur loyauté connaissent les lieux exacts. Nous cherchons
+        l’adrénaline pure, l’art de la conduite, et la fraternité entre ceux qui
+        vivent pour la vitesse.<br />
+        Dans Los Santos, on parle de nous à voix basse. On dit que lorsque l’on
+        entend un moteur hurler au loin en pleine nuit… c’est que le Shadow
+        Racing Crew est de sortie.
       </p>
     </section>
 
@@ -413,8 +415,8 @@
     </section>
 
     <footer>
-  <a href="Admin.html" class="footer-emote">⚡</a> SRC - Shadow Racing Crew.
-</footer>
+      <a href="Admin.html" class="footer-emote">⚡</a> SRC - Shadow Racing Crew.
+    </footer>
 
     <div class="modal-bg" id="modalBox">
       <div class="modal">
