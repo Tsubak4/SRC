@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -23,7 +23,7 @@
       }
 
       body {
-        background: url("assets/logo.png") center/cover no-repeat fixed;
+        background: url("/assets/logo.png") center/cover no-repeat fixed;
         color: var(--light);
         font-family: "Montserrat", sans-serif;
       }
@@ -165,7 +165,7 @@
 
       .hero::before {
         content: "";
-        background: url("assets/logo2.png") center/cover no-repeat;
+        background: url("/assets/logo2.png") center/cover no-repeat;
         position: absolute;
         top: 0;
         left: 0;
@@ -191,7 +191,9 @@
         font-size: 2.2rem;
         color: var(--violet);
         margin: 0;
-        text-shadow: 0 0 10px #b14bff, 0 0 30px var(--orange);
+        text-shadow:
+          0 0 10px #b14bff,
+          0 0 30px var(--orange);
       }
 
       .container {
@@ -245,7 +247,95 @@
         color: var(--violet);
       }
 
-      /* Popup 1V1 */
+      /* Style pour les courses de la semaine */
+      .course-week-container {
+        margin-top: 15px;
+      }
+
+      .course-card {
+        background: rgba(118, 35, 255, 0.1);
+        border: 2px solid var(--violet);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .course-title {
+        color: var(--orange);
+        font-size: 1.4rem;
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--orange);
+        padding-bottom: 8px;
+      }
+
+      .course-results {
+        min-height: 150px;
+      }
+
+      .loading {
+        text-align: center;
+        color: #aaa;
+        padding: 20px;
+        font-style: italic;
+      }
+
+      /* Style pour la section 1v1 */
+      .one-vs-one-desc {
+        text-align: center;
+        color: var(--orange);
+        margin-bottom: 15px;
+        font-size: 1rem;
+        padding: 10px;
+        background: rgba(255, 140, 0, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid var(--orange);
+      }
+
+      /* Style pour les records circuit (10 courses) */
+      .records-container {
+        margin-top: 15px;
+      }
+
+      .record-course-card {
+        background: rgba(118, 35, 255, 0.1);
+        border: 2px solid var(--violet);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .record-course-title {
+        color: var(--orange);
+        font-size: 1.3rem;
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid var(--orange);
+        padding-bottom: 5px;
+      }
+
+      .record-course-results {
+        min-height: 120px;
+      }
+
+      /* Bouton d'actualisation */
+      .refresh-btn {
+        padding: 5px 15px;
+        font-size: 1.2rem;
+        border: 2px solid var(--orange);
+        border-radius: 10px;
+        background: rgba(255, 140, 0, 0.2);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-left: 10px;
+      }
+
+      .refresh-btn:hover {
+        background: rgba(255, 140, 0, 0.4);
+        color: var(--orange);
+      }
+
       .modal-bg {
         position: fixed;
         top: 0;
@@ -328,6 +418,11 @@
         margin-top: 30px;
       }
 
+      .footer-bottom a:hover {
+        color: white !important;
+        text-decoration: underline !important;
+      }
+
       #open1v1Modal {
         display: block;
         margin: 15px auto 0;
@@ -353,7 +448,7 @@
 
   <body>
     <header>
-      <img src="assets/logo.png" alt="SRC Logo" />
+      <img src="/assets/logo.png" alt="SRC Logo" />
       <div class="burger" id="burger">
         <div></div>
         <div></div>
@@ -385,46 +480,79 @@
         <div class="score-nav">
           <button id="prevBlacklist">⬅️</button>
           <button id="nextBlacklist">➡️</button>
+          <button id="refreshBlacklist" class="refresh-btn" title="Actualiser">
+            🔄
+          </button>
         </div>
+      </section>
+
+      <!-- 1V1 DÉPLACÉ ICI -->
+      <section id="1v1" class="section-card">
+        <h2>Demande de 1V1</h2>
+        <div class="one-vs-one-desc">
+          Vous pouvez demandez à affrontez un coureur spécifique lors des
+          soirées prévue Course poursuite en effectuant une demande ici
+        </div>
+        <button id="open1v1Modal">Race</button>
       </section>
 
       <section id="courses-semaine" class="section-card">
         <h2>Course de la semaine</h2>
-        <div class="score-board" id="courseWeekBoard">
-          <div style="text-align: center; margin-bottom: 12px">
-            <div style="color: var(--violet); font-weight: bold">
-              Circuit : Exemple
-            </div>
+        <div class="course-week-container" id="courseWeekContainer">
+          <div class="course-card" id="course1">
+            <div class="course-title">Course 1</div>
+            <div class="course-results loading">Chargement...</div>
+          </div>
+          <div class="course-card" id="course2">
+            <div class="course-title">Course 2</div>
+            <div class="course-results loading">Chargement...</div>
           </div>
         </div>
         <div class="score-nav">
-          <button id="prevCourseWeek">⬅️</button>
-          <button id="nextCourseWeek">➡️</button>
+          <!-- Les flèches ont été retirées pour cette section -->
+          <button id="refreshCourses" class="refresh-btn" title="Actualiser">
+            🔄
+          </button>
         </div>
       </section>
 
       <section id="record-circuit" class="section-card">
         <h2>Record circuit</h2>
-        <div class="score-board" id="recordCircuitBoard">
-          <div style="text-align: center; margin-bottom: 12px">
-            <div style="color: var(--orange); font-weight: bold">
-              Temps sur la piste : Exemple
-            </div>
+        <div class="records-container" id="recordsContainer">
+          <div class="loading" style="text-align: center; padding: 30px">
+            Chargement des records...
           </div>
         </div>
         <div class="score-nav">
           <button id="prevRecord">⬅️</button>
+          <span id="recordPageInfo">Page 1/1</span>
           <button id="nextRecord">➡️</button>
+          <button id="refreshRecords" class="refresh-btn" title="Actualiser">
+            🔄
+          </button>
         </div>
-      </section>
-
-      <section id="1v1" class="section-card">
-        <h2>Demande de 1V1</h2>
-        <button id="open1v1Modal">Race</button>
       </section>
     </main>
 
-    <footer>⚡ SRC - Shadow Racing Crew.</footer>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-bottom">
+          ⚡SRC -
+          <a
+            href="droits.html"
+            style="
+              color: inherit;
+              text-decoration: none;
+              transition:
+                color 0.3s ease,
+                text-decoration 0.3s ease;
+            "
+          >
+            Tous droits réservés
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <div class="modal-bg" id="modal1v1">
       <div class="modal">
@@ -456,40 +584,102 @@
     </div>
 
     <script>
-      // Burger menu
-      const burger = document.getElementById("burger");
-      const nav = document.getElementById("nav-links");
-      burger.addEventListener("click", () => {
-        nav.classList.toggle("show");
-        burger.classList.toggle("active");
-      });
+      // ============================================
+      // CONFIGURATION GOOGLE SHEETS
+      // ============================================
+      const GOOGLE_SHEETS = {
+        blacklist:
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSex7I9oPkvfpi1elx0bOPhqObstNpyGxNxNNQQHkZ2JrjcbPAXjTEjpTYTb5Idof6TB009LEpRAUu/pub?gid=1659469516&single=true&output=csv",
+        course1:
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSex7I9oPkvfpi1elx0bOPhqObstNpyGxNxNNQQHkZ2JrjcbPAXjTEjpTYTb5Idof6TB009LEpRAUu/pub?gid=799773566&single=true&output=csv",
+        course2:
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSex7I9oPkvfpi1elx0bOPhqObstNpyGxNxNNQQHkZ2JrjcbPAXjTEjpTYTb5Idof6TB009LEpRAUu/pub?gid=46252081&single=true&output=csv",
+        records:
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSex7I9oPkvfpi1elx0bOPhqObstNpyGxNxNNQQHkZ2JrjcbPAXjTEjpTYTb5Idof6TB009LEpRAUu/pub?gid=19822947&single=true&output=csv",
+      };
 
-      // Liste Noire
-      const blacklistItems = [
-        "1. GhostRider / Nissan GTR R35 / 12 450 pts",
-        "2. ShadowFox / BMW M3 GTR / 10 900 pts",
-        "3. NovaFire / Toyota Supra MK4 / 9 560 pts",
-        "4. ChromeDrift / Mazda RX7 FD / 8 240 pts",
-        "5. NeonWolf / Audi RS5 / 7 980 pts",
-        "6. RedViper / Mustang GT / 6 720 pts",
-        "7. MidnightStar / Lexus RCF / 5 680 pts",
-        "8. BlackVenom / Honda S2000 / 4 990 pts",
-        "9. SteelRunner / Subaru STI / 4 650 pts",
-        "10. Frostbyte / Civic Type-R / 4 010 pts",
-        "11. NightHawk / Lamborghini Huracan / 3 950 pts",
-        "12. FireBlade / Ferrari F8 / 3 800 pts",
-        "13. SilverStreak / McLaren 720S / 3 650 pts",
-        "14. Phantom / Porsche 911 GT3 / 3 500 pts",
-        "15. DarkKnight / Audi R8 / 3 400 pts",
-        "16. BlueFalcon / Nissan 370Z / 3 250 pts",
-        "17. CrimsonViper / Mustang Shelby / 3 100 pts",
-        "18. SteelTiger / BMW M4 / 2 950 pts",
-        "19. GhostShadow / Toyota GR Supra / 2 800 pts",
-        "20. IceStorm / Honda NSX / 2 650 pts",
-      ];
-
+      // ============================================
+      // VARIABLES GLOBALES
+      // ============================================
+      let blacklistItems = [];
       let currentBlacklistPage = 0;
       const blacklistBoard = document.querySelector("#liste-noir .score-board");
+
+      // Variables pour les records (10 courses)
+      let recordCourses = [];
+      let currentRecordPage = 0;
+      const recordsContainer = document.getElementById("recordsContainer");
+      const recordPageInfo = document.getElementById("recordPageInfo");
+
+      // ============================================
+      // 1. LISTE NOIRE
+      // ============================================
+      async function loadBlacklistFromGoogleSheets() {
+        try {
+          console.log(
+            "📥 Chargement de la liste noire depuis Google Sheets...",
+          );
+          showLoading("#liste-noir .score-board", "Chargement...");
+
+          const response = await fetch(GOOGLE_SHEETS.blacklist);
+          if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+
+          const csvText = await response.text();
+          const lines = csvText
+            .split("\n")
+            .filter((line) => line.trim() !== "");
+
+          if (lines.length <= 1) throw new Error("Sheet vide");
+
+          blacklistItems = [];
+          for (let i = 1; i < lines.length; i++) {
+            const cells = lines[i].split(",");
+            if (cells.length >= 4) {
+              const place = cells[0]?.trim() || i.toString();
+              const pseudo = cells[1]?.trim() || "Inconnu";
+              const voiture = cells[2]?.trim() || "Sans voiture";
+              const points = cells[3]?.trim() || "0";
+              blacklistItems.push(
+                `${place}. ${pseudo} / ${voiture} / ${points} pts`,
+              );
+            }
+          }
+
+          blacklistItems = blacklistItems.slice(0, 20);
+          console.log(`✅ ${blacklistItems.length} pilotes chargés`);
+          renderBlacklist();
+        } catch (error) {
+          console.error("❌ Erreur liste noire:", error);
+          loadDefaultBlacklistData();
+        }
+      }
+
+      function loadDefaultBlacklistData() {
+        blacklistItems = [
+          "1. GhostRider / Nissan GTR R35 / 12 450 pts",
+          "2. ShadowFox / BMW M3 GTR / 10 900 pts",
+          "3. NovaFire / Toyota Supra MK4 / 9 560 pts",
+          "4. ChromeDrift / Mazda RX7 FD / 8 240 pts",
+          "5. NeonWolf / Audi RS5 / 7 980 pts",
+          "6. RedViper / Mustang GT / 6 720 pts",
+          "7. MidnightStar / Lexus RCF / 5 680 pts",
+          "8. BlackVenom / Honda S2000 / 4 990 pts",
+          "9. SteelRunner / Subaru STI / 4 650 pts",
+          "10. Frostbyte / Civic Type-R / 4 010 pts",
+          "11. NightHawk / Lamborghini Huracan / 3 950 pts",
+          "12. FireBlade / Ferrari F8 / 3 800 pts",
+          "13. SilverStreak / McLaren 720S / 3 650 pts",
+          "14. Phantom / Porsche 911 GT3 / 3 500 pts",
+          "15. DarkKnight / Audi R8 / 3 400 pts",
+          "16. BlueFalcon / Nissan 370Z / 3 250 pts",
+          "17. CrimsonViper / Mustang Shelby / 3 100 pts",
+          "18. SteelTiger / BMW M4 / 2 950 pts",
+          "19. GhostShadow / Toyota GR Supra / 2 800 pts",
+          "20. IceStorm / Honda NSX / 2 650 pts",
+        ];
+        renderBlacklist();
+      }
+
       function renderBlacklist() {
         blacklistBoard.innerHTML = "";
         const start = currentBlacklistPage * 10;
@@ -500,120 +690,430 @@
           blacklistBoard.appendChild(div);
         });
       }
+
       document.getElementById("prevBlacklist").onclick = () => {
         if (currentBlacklistPage > 0) {
           currentBlacklistPage--;
           renderBlacklist();
         }
       };
+
       document.getElementById("nextBlacklist").onclick = () => {
-        if (currentBlacklistPage < 1) {
+        if (currentBlacklistPage < Math.ceil(blacklistItems.length / 10) - 1) {
           currentBlacklistPage++;
           renderBlacklist();
         }
       };
-      renderBlacklist();
 
-      // Courses de la semaine
-      const coursesWeek = [
-        "1. Pilote / voiture / time",
-        "2. Pilote / voiture / time",
-        "3. Pilote / voiture / time",
-        "4. Pilote / voiture / time",
-        "5. Pilote / voiture / time",
-        "6. Pilote / voiture / time",
-        "7. Pilote / voiture / time",
-        "8. Pilote / voiture / time",
-        "9. Pilote / voiture / time",
-        "10. Pilote / voiture / time",
-        "11. Pilote / voiture / time",
-        "12. Pilote / voiture / time",
-      ];
-      let currentCoursePage = 0;
-      const courseWeekBoard = document.getElementById("courseWeekBoard");
-      function renderCourseWeek() {
-        courseWeekBoard.innerHTML = "";
-        const start = currentCoursePage * 10;
+      // Bouton d'actualisation pour la liste noire
+      document.getElementById("refreshBlacklist").onclick = () => {
+        console.log("🔄 Actualisation de la liste noire...");
+        loadBlacklistFromGoogleSheets();
+      };
 
-        // Ajouter les informations du circuit en premier
-        const circuitInfo = document.createElement("div");
-        circuitInfo.style.cssText = "text-align: center; margin-bottom: 12px;";
-        circuitInfo.innerHTML = `
-          <div style="color: var(--violet); font-weight: bold;">
-            Circuit : Exemple
-          </div>
-        `;
-        courseWeekBoard.appendChild(circuitInfo);
+      // ============================================
+      // 2. COURSES DE LA SEMAINE
+      // ============================================
+      async function loadCoursesFromGoogleSheets() {
+        console.log("🏁 Chargement des 2 courses...");
 
-        // Ajouter les items de course
-        coursesWeek.slice(start, start + 10).forEach((i) => {
+        try {
+          // Afficher le chargement
+          showLoading("#course1 .course-results", "Chargement...");
+          showLoading("#course2 .course-results", "Chargement...");
+
+          const [course1Data, course2Data] = await Promise.all([
+            loadCourseData(GOOGLE_SHEETS.course1, 1),
+            loadCourseData(GOOGLE_SHEETS.course2, 2),
+          ]);
+
+          renderCourseResults("course1", course1Data);
+          renderCourseResults("course2", course2Data);
+
+          console.log("✅ 2 courses chargées avec succès");
+        } catch (error) {
+          console.error("❌ Erreur courses:", error);
+          loadDefaultCoursesData();
+        }
+      }
+
+      async function loadCourseData(sheetUrl, courseNumber) {
+        try {
+          const response = await fetch(sheetUrl);
+          if (!response.ok)
+            throw new Error(`Course ${courseNumber}: HTTP ${response.status}`);
+
+          const csvText = await response.text();
+          const lines = csvText
+            .split("\n")
+            .filter((line) => line.trim() !== "");
+
+          if (lines.length <= 1) {
+            return { title: `Course ${courseNumber}`, results: [] };
+          }
+
+          const results = [];
+          let courseTitle = `Course ${courseNumber}`;
+
+          for (let i = 1; i <= 5 && i < lines.length; i++) {
+            const cells = lines[i].split(",");
+
+            if (cells.length >= 5) {
+              if (i === 1 && cells[5]?.trim()) {
+                courseTitle = cells[5].trim();
+              }
+
+              const pilote = cells[0]?.trim();
+              const voiture = cells[1]?.trim();
+              const position = cells[2]?.trim();
+              const temps = cells[3]?.trim();
+              const points = cells[4]?.trim();
+
+              if (pilote || voiture || position) {
+                results.push({
+                  pilote: pilote || "---",
+                  voiture: voiture || "---",
+                  position: position || "---",
+                  temps: temps || "--:--.---",
+                  points: points || "0",
+                });
+              }
+            }
+          }
+
+          results.sort((a, b) => {
+            const posA = parseInt(a.position);
+            const posB = parseInt(b.position);
+            if (!isNaN(posA) && !isNaN(posB)) {
+              return posA - posB;
+            }
+            return 0;
+          });
+
+          return {
+            title: courseTitle,
+            results: results,
+          };
+        } catch (error) {
+          console.error(`Erreur course ${courseNumber}:`, error);
+          return {
+            title: `Course ${courseNumber} (Erreur)`,
+            results: [],
+          };
+        }
+      }
+
+      function renderCourseResults(courseId, courseData) {
+        const container = document
+          .getElementById(courseId)
+          .querySelector(".course-results");
+        const titleElement = document
+          .getElementById(courseId)
+          .querySelector(".course-title");
+
+        if (courseData.title) {
+          titleElement.textContent = courseData.title;
+        }
+
+        container.innerHTML = "";
+
+        if (!courseData.results || courseData.results.length === 0) {
+          container.innerHTML =
+            '<div class="loading">Aucun résultat disponible</div>';
+          return;
+        }
+
+        courseData.results.forEach((result) => {
           const div = document.createElement("div");
           div.className = "score-item";
-          div.textContent = i;
-          courseWeekBoard.appendChild(div);
+          div.textContent = `${result.position}. ${result.pilote} / ${result.voiture} / ${result.temps} / ${result.points} pts`;
+          container.appendChild(div);
         });
       }
-      document.getElementById("prevCourseWeek").onclick = () => {
-        if (currentCoursePage > 0) {
-          currentCoursePage--;
-          renderCourseWeek();
-        }
-      };
-      document.getElementById("nextCourseWeek").onclick = () => {
-        if (currentCoursePage < Math.ceil(coursesWeek.length / 10) - 1) {
-          currentCoursePage++;
-          renderCourseWeek();
-        }
-      };
-      renderCourseWeek();
 
-      // Record circuit
-      const recordCircuit = [
-        "1. Pilote / voiture / time",
-        "2. Pilote / voiture / time",
-        "3. Pilote / voiture / time",
-        "4. Pilote / voiture / time",
-        "5. Pilote / voiture / time",
-      ];
-      let currentRecordPage = 0;
-      const recordCircuitBoard = document.getElementById("recordCircuitBoard");
-      function renderRecordCircuit() {
-        recordCircuitBoard.innerHTML = "";
-        const start = currentRecordPage * 5;
+      function loadDefaultCoursesData() {
+        const defaultResults = [
+          {
+            pilote: "Pilote 1",
+            voiture: "Voiture 1",
+            position: "1",
+            temps: "1:23.456",
+            points: "25",
+          },
+          {
+            pilote: "Pilote 2",
+            voiture: "Voiture 2",
+            position: "2",
+            temps: "1:24.123",
+            points: "18",
+          },
+          {
+            pilote: "Pilote 3",
+            voiture: "Voiture 3",
+            position: "3",
+            temps: "1:25.789",
+            points: "15",
+          },
+          {
+            pilote: "Pilote 4",
+            voiture: "Voiture 4",
+            position: "4",
+            temps: "1:26.345",
+            points: "12",
+          },
+          {
+            pilote: "Pilote 5",
+            voiture: "Voiture 5",
+            position: "5",
+            temps: "1:27.901",
+            points: "10",
+          },
+        ];
 
-        // Ajouter le temps sur la piste en premier
-        const tempsInfo = document.createElement("div");
-        tempsInfo.style.cssText = "text-align: center; margin-bottom: 12px;";
-        tempsInfo.innerHTML = `
-          <div style="color: var(--orange); font-weight: bold;">
-            Temps sur la piste : Exemple
-          </div>
-        `;
-        recordCircuitBoard.appendChild(tempsInfo);
-
-        // Ajouter les items de record
-        recordCircuit.slice(start, start + 5).forEach((i) => {
-          const div = document.createElement("div");
-          div.className = "score-item";
-          div.textContent = i;
-          recordCircuitBoard.appendChild(div);
+        renderCourseResults("course1", {
+          title: "Course 1 (Démo)",
+          results: defaultResults,
+        });
+        renderCourseResults("course2", {
+          title: "Course 2 (Démo)",
+          results: defaultResults,
         });
       }
+
+      // Bouton d'actualisation pour les courses
+      document.getElementById("refreshCourses").onclick = () => {
+        console.log("🔄 Actualisation des courses de la semaine...");
+        loadCoursesFromGoogleSheets();
+      };
+
+      // ============================================
+      // 3. RECORDS CIRCUIT
+      // ============================================
+      async function loadRecordsFromGoogleSheets() {
+        try {
+          console.log(
+            "⏱️ Chargement des 10 courses records depuis Google Sheets...",
+          );
+          showLoading("#recordsContainer", "Chargement des records...");
+
+          const response = await fetch(GOOGLE_SHEETS.records);
+          if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+
+          const csvText = await response.text();
+          const lines = csvText
+            .split("\n")
+            .filter((line) => line.trim() !== "");
+
+          if (lines.length < 6)
+            throw new Error(
+              "Sheet records vide ou pas assez de lignes (besoin de 6 lignes)",
+            );
+
+          recordCourses = [];
+
+          const courseConfigs = [
+            { titleCol: 0, piloteCol: 1, voitureCol: 2, tempsCol: 3 },
+            { titleCol: 5, piloteCol: 6, voitureCol: 7, tempsCol: 8 },
+            { titleCol: 10, piloteCol: 11, voitureCol: 12, tempsCol: 13 },
+            { titleCol: 15, piloteCol: 16, voitureCol: 17, tempsCol: 18 },
+            { titleCol: 20, piloteCol: 21, voitureCol: 22, tempsCol: 23 },
+            { titleCol: 25, piloteCol: 26, voitureCol: 27, tempsCol: 28 },
+            { titleCol: 29, piloteCol: 30, voitureCol: 31, tempsCol: 32 },
+            { titleCol: 34, piloteCol: 35, voitureCol: 36, tempsCol: 37 },
+            { titleCol: 39, piloteCol: 40, voitureCol: 41, tempsCol: 42 },
+            { titleCol: 44, piloteCol: 45, voitureCol: 46, tempsCol: 47 },
+          ];
+
+          courseConfigs.forEach((config, courseIndex) => {
+            const course = {
+              title: "",
+              results: [],
+            };
+
+            if (lines.length > 1) {
+              const cellsLigne2 = lines[1].split(",");
+              if (cellsLigne2.length > config.titleCol) {
+                course.title =
+                  cellsLigne2[config.titleCol]?.trim() ||
+                  `Course ${courseIndex + 1}`;
+              }
+            }
+
+            for (
+              let ligneIndex = 1;
+              ligneIndex <= 5 && ligneIndex < lines.length;
+              ligneIndex++
+            ) {
+              const cells = lines[ligneIndex].split(",");
+
+              if (
+                cells.length >
+                Math.max(config.piloteCol, config.voitureCol, config.tempsCol)
+              ) {
+                const pilote = cells[config.piloteCol]?.trim();
+                const voiture = cells[config.voitureCol]?.trim();
+                const temps = cells[config.tempsCol]?.trim();
+
+                if (pilote || voiture || temps) {
+                  course.results.push({
+                    position: ligneIndex.toString(),
+                    pilote: pilote || "---",
+                    voiture: voiture || "---",
+                    temps: temps || "--:--.---",
+                  });
+                }
+              }
+            }
+
+            course.results.sort((a, b) => {
+              return parseInt(a.position) - parseInt(b.position);
+            });
+
+            recordCourses.push(course);
+          });
+
+          console.log(`✅ ${recordCourses.length} courses records chargées`);
+
+          currentRecordPage = 0;
+          renderRecordsPage();
+        } catch (error) {
+          console.error("❌ Erreur records:", error);
+          loadDefaultRecordsData();
+        }
+      }
+
+      function renderRecordsPage() {
+        recordsContainer.innerHTML = "";
+
+        if (recordCourses.length === 0) {
+          recordsContainer.innerHTML =
+            '<div class="loading">Aucun record disponible</div>';
+          recordPageInfo.textContent = "Page 0/0";
+          return;
+        }
+
+        const courseIndex = currentRecordPage;
+
+        if (courseIndex >= 0 && courseIndex < recordCourses.length) {
+          const course = recordCourses[courseIndex];
+
+          const courseCard = document.createElement("div");
+          courseCard.className = "record-course-card";
+
+          const titleElement = document.createElement("div");
+          titleElement.className = "record-course-title";
+          titleElement.textContent =
+            course.title || `Course ${courseIndex + 1}`;
+          courseCard.appendChild(titleElement);
+
+          const resultsContainer = document.createElement("div");
+          resultsContainer.className = "record-course-results";
+
+          if (course.results.length === 0) {
+            resultsContainer.innerHTML =
+              '<div class="loading" style="padding: 10px;">Aucun résultat disponible</div>';
+          } else {
+            course.results.forEach((result) => {
+              const div = document.createElement("div");
+              div.className = "score-item";
+              div.textContent = `${result.position}. ${result.pilote} / ${result.voiture} / ${result.temps}`;
+              resultsContainer.appendChild(div);
+            });
+          }
+
+          courseCard.appendChild(resultsContainer);
+          recordsContainer.appendChild(courseCard);
+        }
+
+        recordPageInfo.textContent = `Page ${currentRecordPage + 1}/${recordCourses.length}`;
+
+        document.getElementById("prevRecord").disabled =
+          currentRecordPage === 0;
+        document.getElementById("nextRecord").disabled =
+          currentRecordPage === recordCourses.length - 1;
+      }
+
+      function loadDefaultRecordsData() {
+        recordCourses = [];
+
+        for (let i = 1; i <= 10; i++) {
+          const course = {
+            title: `Circuit ${i} (Démo)`,
+            results: [],
+          };
+
+          for (let j = 1; j <= 5; j++) {
+            course.results.push({
+              position: j.toString(),
+              pilote: `Pilote ${j}`,
+              voiture: `Voiture ${j}`,
+              temps: `1:${20 + j * 2}.${j * 100}`,
+            });
+          }
+
+          recordCourses.push(course);
+        }
+
+        console.log(
+          `✅ ${recordCourses.length} courses records (démo) chargées`,
+        );
+
+        currentRecordPage = 0;
+        renderRecordsPage();
+      }
+
+      // Navigation pour les records
       document.getElementById("prevRecord").onclick = () => {
         if (currentRecordPage > 0) {
           currentRecordPage--;
-          renderRecordCircuit();
+          renderRecordsPage();
         }
       };
-      document.getElementById("nextRecord").onclick = () => {
-        if (currentRecordPage < Math.ceil(recordCircuit.length / 5) - 1) {
-          currentRecordPage++;
-          renderRecordCircuit();
-        }
-      };
-      renderRecordCircuit();
 
-      // Popup 1V1
+      document.getElementById("nextRecord").onclick = () => {
+        if (currentRecordPage < recordCourses.length - 1) {
+          currentRecordPage++;
+          renderRecordsPage();
+        }
+      };
+
+      // Bouton d'actualisation pour les records
+      document.getElementById("refreshRecords").onclick = () => {
+        console.log("🔄 Actualisation des records circuit...");
+        loadRecordsFromGoogleSheets();
+      };
+
+      // ============================================
+      // FONCTIONS UTILITAIRES
+      // ============================================
+      function showLoading(selector, message = "Chargement...") {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.innerHTML = `<div class="loading">${message}</div>`;
+        }
+      }
+
+      // ============================================
+      // 4. INITIALISATION
+      // ============================================
+      window.addEventListener("DOMContentLoaded", () => {
+        // Menu burger
+        const burger = document.getElementById("burger");
+        const nav = document.getElementById("nav-links");
+        burger.addEventListener("click", () => {
+          nav.classList.toggle("show");
+          burger.classList.toggle("active");
+        });
+
+        // Charger toutes les données
+        loadBlacklistFromGoogleSheets();
+        loadCoursesFromGoogleSheets();
+        loadRecordsFromGoogleSheets();
+      });
+
+      // ============================================
+      // 5. FORMULAIRE 1V1 (inchangé)
+      // ============================================
       const modal1v1 = document.getElementById("modal1v1");
       document.getElementById("open1v1Modal").onclick = (e) => {
         e.preventDefault();
@@ -634,10 +1134,10 @@
           const dateObj = new Date(dateStr);
           const formattedDate = `${String(dateObj.getDate()).padStart(
             2,
-            "0"
+            "0",
           )}/${String(dateObj.getMonth() + 1).padStart(
             2,
-            "0"
+            "0",
           )}/${dateObj.getFullYear()}`;
           const data = {
             content: `<@295593446406750209>`,
@@ -665,12 +1165,12 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
-              }
+              },
             );
             if (res.ok) {
               modal1v1.classList.remove("show");
               alert(
-                "✅ Votre demande a bien été envoyée, attendez une réponse dans les 24h !"
+                "✅ Votre demande a bien été envoyée, attendez une réponse dans les 24h !",
               );
               this.reset();
             } else alert("❌ Erreur lors de l'envoi !");
