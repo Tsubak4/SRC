@@ -24,15 +24,8 @@
         box-sizing: border-box;
       }
 
-      html, body {
-        height: 100%;
-      }
-
       body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background: url("assets/logo.png") center black no-repeat fixed;
+        background: url("/assets/logo.png") center black no-repeat fixed;
         background-size: contain;
         color: var(--light);
         font-family: "Montserrat", sans-serif;
@@ -146,10 +139,6 @@
         }
       }
 
-      .main-content {
-        flex: 1;
-      }
-
       .hero {
         text-align: center;
         padding: 200px 20px 100px 20px;
@@ -158,7 +147,7 @@
 
       .hero::before {
         content: "";
-        background: url("assets/logo2.png") center/cover no-repeat;
+        background: url("/assets/logo2.png") center/cover no-repeat;
         position: absolute;
         top: 0;
         left: 0;
@@ -225,6 +214,11 @@
         animation: neonPulse 2s infinite alternate;
       }
 
+      .footer-bottom a:hover {
+        color: white !important;
+        text-decoration: underline !important;
+      }
+
       @keyframes neonGlow {
         from {
           text-shadow: 0 0 10px #7623ff, 0 0 25px #ff8c00;
@@ -282,7 +276,7 @@
         font-size: 2rem;
         margin-bottom: 10px;
       }
-      
+
       .btn {
         display: inline-block;
         padding: 12px 30px;
@@ -304,7 +298,7 @@
         background: var(--dark);
         color: var(--violet);
         font-weight: bold;
-        margin-top: auto;
+        margin-top: 50px;
       }
 
       .modal-bg {
@@ -372,12 +366,120 @@
         color: inherit;
         cursor: pointer;
       }
+
+      .about-section {
+        background-color: black;
+        border: 3px solid var(--violet);
+        border-radius: 20px;
+        padding: 40px 30px;
+        margin: 40px auto;
+        max-width: 1200px;
+        position: relative;
+        animation: neonBorderPulse 2s infinite alternate;
+        box-shadow: 0 0 20px rgba(118, 35, 255, 0.8),
+          0 0 40px rgba(255, 140, 0, 0.4);
+      }
+
+      .about-section h2 {
+        color: var(--violet);
+        text-shadow: 0 0 10px #b14bff, 0 0 25px #ff8c00, 0 0 50px var(--violet);
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        animation: neonGlow 1.3s infinite alternate;
+        text-decoration: none !important;
+      }
+
+      .about-section p {
+        color: white;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        text-align: justify;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        border: 2px solid var(--orange);
+        animation: neonPulse 2s infinite alternate;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        margin-bottom: 40px;
+      }
+
+      .about-section::before,
+      .about-section::after {
+        content: "⚡";
+        position: absolute;
+        font-size: 24px;
+        color: var(--orange);
+        animation: sparkMove 1.5s infinite linear alternate;
+      }
+
+      .about-section::before {
+        top: -15px;
+        left: -15px;
+      }
+      .about-section::after {
+        bottom: -15px;
+        right: -15px;
+        animation-delay: 0.7s;
+      }
+
+      /* STYLE POUR L'IMAGE LOGO */
+      .about-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        padding: 20px;
+      }
+
+      .about-logo img {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        border: 3px solid var(--violet);
+        box-shadow: 0 0 20px rgba(118, 35, 255, 0.8),
+          0 0 40px rgba(255, 140, 0, 0.4);
+        animation: neonBorderPulse 2s infinite alternate;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .about-logo img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(118, 35, 255, 1),
+          0 0 60px rgba(255, 140, 0, 0.6);
+      }
+
+      @media (max-width: 768px) {
+        .about-section {
+          padding: 30px 20px;
+          margin: 30px 15px;
+        }
+
+        .about-section h2 {
+          font-size: 2rem;
+        }
+
+        .about-section p {
+          font-size: 1rem;
+          padding: 15px;
+          margin-bottom: 30px;
+        }
+
+        .about-logo img {
+          max-width: 200px;
+        }
+
+        .about-logo {
+          margin-top: 30px;
+          padding: 15px;
+        }
+      }
     </style>
   </head>
 
   <body>
     <header>
-      <img src="assets/logo.png" alt="SRC Logo" />
+      <img src="/assets/logo.png" alt="SRC Logo" />
       <div class="burger" id="burger">
         <div></div>
         <div></div>
@@ -392,33 +494,49 @@
       </nav>
     </header>
 
-    <div class="main-content">
-      <div class="hero">
-        <div class="hero-title-wrapper"><h1>Shadow Racing Crew</h1></div>
-        <p>Courses • Poursuites • 800m • Drift</p>
-      </div>
-
-      <section>
-        <h2>Qui somme nous ?</h2>
-        <p>
-          Dans les rues éclairées au néon de Los Santos, là où la ville ne dort
-          jamais et où les sirènes résonnent plus souvent que le vent. Nous sommes
-          des passionnés d’automobile, des obsédés de la vitesse et du contrôle
-          parfait, guidés par une seule chose : la maîtrise de la route, sous
-          n’importe quelles conditions.<br />
-          Nos sessions sont non officielles, jamais annoncées, et seuls ceux qui
-          ont prouvé leur loyauté connaissent les lieux exacts. Nous cherchons
-          l’adrénaline pure, l’art de la conduite, et la fraternité entre ceux qui
-          vivent pour la vitesse.<br />
-          Dans Los Santos, on parle de nous à voix basse. On dit que lorsque l’on
-          entend un moteur hurler au loin en pleine nuit… c’est que le Shadow
-          Racing Crew est de sortie.
-        </p>
-      </section>
+    <div class="hero">
+      <div class="hero-title-wrapper"><h1>Shadow Racing Crew</h1></div>
+      <p>Courses • Poursuites • 800m • Drift</p>
     </div>
 
+    <section class="about-section">
+      <h2>Qui somme nous ?</h2>
+      <p>
+        Dans les rues éclairées au néon de Los Santos, là où la ville ne dort
+        jamais et où les sirènes résonnent plus souvent que le vent. Nous sommes
+        des passionnés d'automobile, des obsédés de la vitesse et du contrôle
+        parfait, guidés par une seule chose : la maîtrise de la route, sous
+        n'importe quelles conditions.<br /><br />
+        Nos sessions sont non officielles, jamais annoncées, et seuls ceux qui
+        ont prouvé leur loyauté connaissent les lieux exacts. Nous cherchons
+        l'adrénaline pure, l'art de la conduite, et la fraternité entre ceux qui
+        vivent pour la vitesse.<br /><br />
+        Dans Los Santos, on parle de nous à voix basse. On dit que lorsque l'on
+        entend un moteur hurler au loin en pleine nuit… c'est que le Shadow
+        Racing Crew est de sortie.
+      </p>
+
+      <div class="about-logo">
+        <img src="/assets/logo.png" alt="Logo SRC - Shadow Racing Crew" />
+      </div>
+    </section>
+
     <footer>
-      <a href="Admin.html" class="footer-emote">⚡</a> SRC - Shadow Racing Crew.
+      <div class="container">
+        <div class="footer-bottom">
+          <a href="Admin.html" class="footer-emote">⚡</a> SRC -
+          <a
+            href="droits.html"
+            style="
+              color: inherit;
+              text-decoration: none;
+              transition: color 0.3s ease, text-decoration 0.3s ease;
+            "
+          >
+            Tous droits réservés
+          </a>
+        </div>
+      </div>
     </footer>
 
     <div class="modal-bg" id="modalBox">
@@ -501,7 +619,7 @@
               this.reset();
             } else alert("❌ Erreur Discord !");
           } catch {
-            alert("❌ Erreur d’envoi.");
+            alert("❌ Erreur d'envoi.");
           }
         });
 
